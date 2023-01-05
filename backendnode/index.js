@@ -50,3 +50,17 @@ app.get('/blogs', function (req, res) {
         }
     })
 })
+
+//rest api to create a new record into mysql db
+
+app.post('/blogs', function(req, res){
+    var postData = req.body;
+
+    connection.query('Insert INTO blogs SET ?', postData, function(error, results, fields){
+        if (error) {
+            throw error
+        } else {
+           res.end(JSON.stringify(results)) 
+        }
+    })
+})
